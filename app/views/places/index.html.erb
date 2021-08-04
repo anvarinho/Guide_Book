@@ -1,0 +1,35 @@
+<% if user_signed_in? %>
+
+  <h1>Places</h1>
+
+  <table class="table table-dark table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Photo</th>
+        <th>User ID</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @places.each do |place| %>
+        <% if place.user == current_user %>
+          <tr>
+            <td><%= link_to place.name , place %></td>
+            <td><%= place.description %></td>
+            <td><%= place.photo %></td>
+            <td><%= link_to 'Delete', place, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-outline-danger btn-sm" %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Place', new_place_path%>
+<% else %>
+  <h1>Hello</h1>
+  <h3>Log in to continue</h3>
+<% end %>

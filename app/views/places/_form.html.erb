@@ -1,0 +1,36 @@
+<%= form_with(model: place) do |form| %>
+  <% if place.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(place.errors.count, "error") %> prohibited this place from being saved:</h2>
+
+      <ul>
+        <% place.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.text_field :name, class:"form-control", placeholder:"Name" %>
+  </div>
+  </br>
+
+  <div class="field form-group">
+    <%= form.text_field :description, class:"form-control", placeholder:"Description"  %>
+  </div>
+  </br>
+
+  <div class="field form-group">
+    <%= form.text_field :photo, class:"form-control", placeholder:"Photo"  %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.number_field :user_id, id: :place_user_id, class:"form-control", value: current_user.id, type: :hidden %>
+  </div>
+</br>
+
+  <div class="actions">
+    <%= form.submit class:"btn btn-secondary" %>
+  </div>
+<% end %>
